@@ -1,60 +1,38 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>感谢提交</title>
   <style>
     body {
-      font-family: "Helvetica Neue", "Arial", sans-serif;
-      background-color: #fefdfc;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 480px;
-      margin: 100px auto;
-      padding: 2em;
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      border-radius: 12px;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 50px;
+      background-color: #f0f9ff;
     }
-    h1 {
-      color: #4CAF50;
-      margin-bottom: 0.5em;
-    }
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    .emoji {
-      font-size: 48px;
-      margin-bottom: 0.5em;
-    }
-    a.button {
+    .thank-you {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
       display: inline-block;
-      margin-top: 1.5em;
-      padding: 0.6em 1.5em;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    a.button:hover {
-      background-color: #45a049;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="emoji">🐾</div>
-    <h1>感谢您的提交！</h1>
-    <p>我们已收到您的宠物健康信息，<br />AI助手会尽快分析并提供建议。</p>
-    <p>请保持微信或邮箱畅通。</p>
-    <a class="button" href="form.html">返回填写新表单</a>
+  <div class="thank-you">
+    <h1>提交成功！</h1>
+    <p>感谢您提交宠物健康信息</p>
+    <p>页面将在 <span id="countdown">5</span> 秒后自动关闭</p>
   </div>
+  
+  <script>
+    // 5秒倒计时后关闭窗口
+    let seconds = 5;
+    setInterval(() => {
+      seconds--;
+      document.getElementById('countdown').textContent = seconds;
+      if(seconds <= 0) window.close();
+    }, 1000);
+  </script>
 </body>
 </html>
