@@ -67,4 +67,4 @@ export default async function handler(req) {
     return new Response('服务器内部错误', { status: 500 });
   }
 }
-添加 /api/submit.js 处理表单提交请求
+添加 /api/submit.js 
