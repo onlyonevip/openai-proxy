@@ -2,176 +2,201 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>宠物AI健康申报表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>宠物健康档案</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #f8f8f8;
-      margin: 0;
+      font-family: "Segoe UI", sans-serif;
       padding: 20px;
+      background-color: #f9f9f9;
       line-height: 1.6;
     }
-    form {
-      background-color: #fff;
-      padding: 24px;
-      border-radius: 12px;
-      max-width: 720px;
+
+    .container {
+      max-width: 700px;
       margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    h3 {
-      color: #d9534f;
-      margin-top: 1.5em;
+
+    h1 {
+      text-align: center;
+      color: #333;
     }
-    label, textarea, input[type="text"], input[type="email"] {
+
+    .warning {
+      background-color: #fff3cd;
+      border-left: 6px solid #ffa500;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    label {
       display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
       width: 100%;
-      margin: 8px 0;
-      font-size: 14px;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
-    .section {
-      margin-top: 24px;
+
+    .checkbox-group,
+    .radio-group {
+      margin-top: 10px;
+      padding-left: 20px;
     }
-    .small {
-      font-size: 12px;
-      color: gray;
+
+    .checkbox-group label,
+    .radio-group label {
+      display: block;
+      font-weight: normal;
     }
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
+
+    .small-input {
+      width: 120px;
+      display: inline-block;
+      margin-right: 10px;
     }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+
     .agreement {
-      background-color: #f2f2f2;
-      border-left: 4px solid #d9534f;
-      padding: 12px;
-      font-size: 14px;
-      margin-top: 24px;
+      margin-top: 30px;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
     }
-    .checkbox-label {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
+
+    summary {
+      cursor: pointer;
+      color: #007bff;
+      font-weight: bold;
     }
-    .checkbox-label input {
-      margin-right: 8px;
+
+    .submit-button {
+      margin-top: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-  <form>
-    <h3>⚠️ 健康申报声明</h3>
-    <div class="section">
-      <p>1. 请先确认：□ 牙龈苍白 □ 腹部肿胀 □ 无法站立 □ 尿血/尿闭 → 出现请立即就医！</p>
-      <p>2. 本服务由 AI 生成健康养护参考，<strong>不可替代兽医诊断</strong></p>
-      <p>3. 提交即代表同意《用户协议》</p>
+  <div class="container">
+    <div class="warning">
+      ⚠️ <strong>健康申报声明</strong><br>
+      1. 请先确认：□ 牙龈苍白 □ 腹部肿胀 □ 无法站立 □ 尿血/尿闭 → <strong>出现请立即就医！</strong><br>
+      2. 本服务由 AI 生成健康养护参考，<strong>不可替代兽医诊断</strong><br>
+      3. 提交即代表您同意《用户协议》
     </div>
 
-    <div class="section">
-      <h4>宠物健康档案</h4>
-      <label>1. 宠物的名字：<input type="text" name="name"></label>
-      <label>2. 宠物类型：<input type="text" name="species"></label>
-      <div class="grid-2">
-        <label>3. 年龄（岁）：<input type="text" name="age_year"></label>
-        <label>年龄（月）：<input type="text" name="age_month"></label>
+    <h1>宠物健康档案</h1>
+    <form action="thanks.html" method="POST">
+      <label>1. 宠物的名字：</label>
+      <input type="text" name="name" required />
+
+      <label>2. 宠物类型：</label>
+      <input type="text" name="type" required />
+
+      <label>3. 年龄：</label>
+      <input type="number" name="age_years" class="small-input" placeholder="岁" min="0" /> 岁
+      <input type="number" name="age_months" class="small-input" placeholder="月" min="0" max="11" /> 月
+
+      <label>4. 性别：</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="公" required /> 公</label>
+        <label><input type="radio" name="gender" value="母" /> 母</label>
+        <label><input type="radio" name="gender" value="已绝育" /> 已绝育</label>
       </div>
-      <label>4. 性别：○ 公 ○ 母 ○ 已绝育</label>
-      <label>5. 体重范围：○ <5kg ○ 5-10kg ○ >10kg</label>
-      <label>6. 疫苗情况：○ 未接种 ○ 部分接种 ○ 完整接种</label>
-      <label>7. 最后一次驱虫日期：<input type="text" name="deworm_date"></label>
-      <label>8. 最近7天是否用药？ ○ 否（默认） ○ 是（药名：<input type="text" name="medicine">）</label>
-      <label>9. 近期接触史：</label>
-      <div class="grid-2">
-        <label class="checkbox-label"><input type="checkbox"> 接触陌生动物</label>
-        <label class="checkbox-label"><input type="checkbox"> 环境变化（搬家/寄养）</label>
-        <label class="checkbox-label"><input type="checkbox"> 多宠家庭</label>
-        <label class="checkbox-label"><input type="checkbox"> 无</label>
+
+      <label>5. 体重范围：</label>
+      <div class="radio-group">
+        <label><input type="radio" name="weight" value="<5kg" required /> &lt;5kg</label>
+        <label><input type="radio" name="weight" value="5-10kg" /> 5–10kg</label>
+        <label><input type="radio" name="weight" value=">10kg" /> &gt;10kg</label>
       </div>
-    </div>
 
-    <div class="section">
-      <h4>健康观察</h4>
-      <label>10. 观察到的情况：</label>
-      <label class="checkbox-label"><input type="checkbox"> 软便/腹泻
-        <span style="margin-left:1em">排泄物状态：□ 水样 □ 黏液 □ 带血</span>
-      </label>
-      <label class="checkbox-label"><input type="checkbox"> 呕吐（频率：○ 首次 ○ 偶尔 ○ 频繁）</label>
-      <label class="checkbox-label"><input type="checkbox"> 食欲下降</label>
-      <label class="checkbox-label"><input type="checkbox"> 排便困难</label>
-      <label class="checkbox-label"><input type="checkbox"> 呼吸道异常（咳嗽/打喷嚏）</label>
-      <label class="checkbox-label"><input type="checkbox"> 精神萎靡</label>
-      <label class="checkbox-label"><input type="checkbox"> 皮肤红肿/脱毛</label>
-      <label class="checkbox-label"><input type="checkbox"> 其他：<input type="text" name="other_symptom"></label>
-      <div class="grid-2">
-        <label>11. 症状持续时间：<input type="text" name="duration"></label>
-        <label>12. 症状发生频率（默认“首次出现”）：○ 首次出现 ○ 偶尔 ○ 频繁</label>
+      <label>6. 疫苗情况：</label>
+      <div class="radio-group">
+        <label><input type="radio" name="vaccine" value="未接种" required /> 未接种</label>
+        <label><input type="radio" name="vaccine" value="部分接种" /> 部分接种</label>
+        <label><input type="radio" name="vaccine" value="完整接种" /> 完整接种</label>
       </div>
-      <label>13. 最近48小时饮食：<textarea rows="2"></textarea></label>
-    </div>
 
-    <div class="section">
-      <h4>养护记录</h4>
-      <label>14. 已采取的措施：</label>
-      <label class="checkbox-label"><input type="checkbox"> 停食（时长：<input type="text" name="fast_hours" style="width:60px"> 小时）</label>
-      <label class="checkbox-label"><input type="checkbox"> 更换水源</label>
-      <label class="checkbox-label"><input type="checkbox"> 环境清洁</label>
-      <label class="checkbox-label"><input type="checkbox"> 使用非处方保健品（名称：<input type="text" name="supplement">）</label>
-      <label class="checkbox-label"><input type="checkbox"> 其他：<input type="text" name="other_action"></label>
-      <label>15. 照片补充（非必传）：<input type="file"></label>
-    </div>
+      <label>7. 最后一次驱虫日期：</label>
+      <input type="text" name="deworming_date" placeholder="例如：2025-06-01" />
 
-    <div class="section">
-      <h4>报告接收</h4>
-      <label>16. 接收建议方式（至少一项）</label>
-      <label>○ 微信 → 微信号：<input type="text" name="wechat"></label>
-      <label>○ 邮箱 → <input type="email" name="email" required></label>
-    </div>
+      <label>8. 近期接触史（可多选）：</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="exposure" value="接触陌生动物" /> 接触陌生动物</label>
+        <label><input type="checkbox" name="exposure" value="环境变化" /> 环境变化（搬家/寄养）</label>
+        <label><input type="checkbox" name="exposure" value="多宠家庭" /> 多宠家庭</label>
+        <label><input type="checkbox" name="exposure" value="无" /> 无</label>
+      </div>
 
-    <div class="agreement">
-      ✅ 您确认：<br>
-      1. 宠物无声明中的危急症状<br>
-      2. 未自行使用处方药<br>
-      3. 知悉AI建议的参考性质
-    </div>
+      <label>9. 观察到的情况（多选）：</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="symptom" value="软便/腹泻" /> 软便/腹泻</label>
+        <label><input type="checkbox" name="symptom" value="呕吐" /> 呕吐</label>
+        <label><input type="checkbox" name="symptom" value="食欲下降" /> 食欲下降</label>
+        <label><input type="checkbox" name="symptom" value="排便困难" /> 排便困难</label>
+        <label><input type="checkbox" name="symptom" value="咳嗽/打喷嚏" /> 呼吸道异常（咳嗽/打喷嚏）</label>
+        <label><input type="checkbox" name="symptom" value="精神萎靡" /> 精神萎靡</label>
+        <label><input type="checkbox" name="symptom" value="皮肤问题" /> 皮肤红肿/脱毛</label>
+        <label><input type="checkbox" name="symptom" value="其他" /> 其他：
+          <input type="text" name="symptom_other" />
+        </label>
+      </div>
 
-    <div class="section">
-      <h4>《AI宠物健康顾问服务使用协议》</h4>
-      <p>生效日期：______年______月______日</p>
-      <p><strong>一、服务性质声明</strong><br>
-        本服务由AI生成宠物健康养护建议，不具备医疗诊断属性。若宠物出现危急症状或建议无效，您应及时就医。</p>
-      <p><strong>二、用户义务与限制</strong><br>
-        - 保证信息真实准确<br>
-        - 禁止用于濒危动物/传播建议截图/未成年人独立使用</p>
-      <p><strong>三、平台免责条款</strong><br>
-        - 用户行为或不可抗力造成的问题平台免责</p>
-      <p><strong>四、知识产权与数据授权</strong><br>
-        - 上传内容归用户所有<br>
-        - 匿名化用于改进AI服务</p>
-      <p><strong>五、隐私保护</strong><br>
-        - 联系方式加密，健康数据最长保存72小时（免费）</p>
-      <p><strong>六、协议更新与终止</strong><br>
-        - 协议变更公告于官网，严重违规可终止服务</p>
-    </div>
+      <label>10. 症状持续时间：</label>
+      <input type="number" name="duration_days" class="small-input" placeholder="天" min="0" /> 天
+      <input type="number" name="duration_hours" class="small-input" placeholder="小时" min="0" max="24" /> 小时
 
-    <label class="checkbox-label">
-      <input type="checkbox" required>
-      我已阅读并同意《用户协议》，确认：<br>
-      1. 我的宠物未出现协议禁止的危急症状<br>
-      2. 我知悉AI建议的参考性质及自身责任<br>
-      3. 我授权平台在匿名化前提下使用数据改进服务
-    </label>
+      <label>11. 最近48小时饮食（吃过什么特殊食物？）：</label>
+      <textarea name="food_detail" rows="2"></textarea>
 
-    <div style="margin-top: 20px; text-align:center">
-      <button type="submit" style="padding: 10px 20px; font-size: 16px; border:none; background:#28a745; color:white; border-radius: 6px; cursor:pointer;">提交表单</button>
-    </div>
-  </form>
+      <label>12. 已采取的措施（例如停食/喂益生菌）：</label>
+      <textarea name="actions_taken" rows="2"></textarea>
+
+      <label>13. 照片补充（非必传）：</label>
+      <input type="file" name="photo" />
+
+      <label>14. 接收建议方式：</label>
+      <input type="text" name="wechat" placeholder="微信号（必填）" required />
+      <input type="email" name="email" placeholder="邮箱（可选）" />
+
+      <div class="agreement">
+        <details>
+          <summary>📜 查看《用户协议》</summary>
+          <p>
+            本服务由AI提供健康养护建议，不构成医疗行为，也不替代兽医诊断。<br>
+            所有建议基于您填写的信息，若填写不实或遗漏，将影响结果准确性。<br>
+            使用本服务即视为您已知悉并接受此免责声明与使用协议。
+          </p>
+        </details>
+      </div>
+
+      <button type="submit" class="submit-button">提交信息</button>
+    </form>
+  </div>
 </body>
 </html>
-
 
