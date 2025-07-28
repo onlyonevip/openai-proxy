@@ -11,6 +11,7 @@
       background-color: #f9f9f9;
       line-height: 1.6;
     }
+
     .container {
       max-width: 700px;
       margin: auto;
@@ -19,10 +20,12 @@
       padding: 30px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
     h1 {
       text-align: center;
       color: #333;
     }
+
     .warning {
       background-color: #fff3cd;
       border-left: 6px solid #ffa500;
@@ -30,12 +33,14 @@
       margin-bottom: 20px;
       font-size: 15px;
     }
+
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
       color: #333;
     }
+
     input[type="text"],
     input[type="email"],
     input[type="number"],
@@ -46,31 +51,37 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+
     .checkbox-group,
     .radio-group {
       margin-top: 10px;
       padding-left: 20px;
     }
+
     .checkbox-group label,
     .radio-group label {
       display: block;
       font-weight: normal;
     }
+
     .small-input {
       width: 120px;
       display: inline-block;
       margin-right: 10px;
     }
+
     .agreement {
       margin-top: 30px;
       border-top: 1px solid #ccc;
       padding-top: 20px;
     }
+
     summary {
       cursor: pointer;
       color: #007bff;
       font-weight: bold;
     }
+
     .submit-button {
       margin-top: 20px;
       background-color: #4CAF50;
@@ -82,6 +93,7 @@
       font-size: 16px;
       width: 100%;
     }
+
     .submit-button:hover {
       background-color: #45a049;
     }
@@ -97,8 +109,7 @@
     </div>
 
     <h1>宠物健康档案</h1>
-
-    <form id="petForm" action="/api/submit" method="POST" enctype="multipart/form-data">
+    <form action="thanks.html" method="POST">
       <label>1. 宠物的名字：</label>
       <input type="text" name="name" required />
 
@@ -176,49 +187,16 @@
         <details>
           <summary>📜 查看《用户协议》</summary>
           <p>
-            本服务由AI提供健康养护建议，不构成医疗行为，也不替代兽医诊断。<br />
-            所有建议基于您填写的信息，若填写不实或遗漏，将影响结果准确性。<br />
+            本服务由AI提供健康养护建议，不构成医疗行为，也不替代兽医诊断。<br>
+            所有建议基于您填写的信息，若填写不实或遗漏，将影响结果准确性。<br>
             使用本服务即视为您已知悉并接受此免责声明与使用协议。
           </p>
         </details>
       </div>
 
-      <label class="checkbox-label" style="margin-top:20px;">
-        <input type="checkbox" required />
-        我已阅读并同意《用户协议》，确认：<br />
-        1. 我的宠物未出现协议禁止的危急症状<br />
-        2. 我知悉AI建议的参考性质及自身责任<br />
-        3. 我授权平台在匿名化前提下使用数据改进服务
-      </label>
-
       <button type="submit" class="submit-button">提交信息</button>
     </form>
-  </div> 
-
-  <script>
-    document.getElementById("petForm").addEventListener("submit", async function(e) {
-      e.preventDefault(); // 阻止默认表单提交行为
-
-      const form = e.target;
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch(form.action, {
-          method: form.method,
-          body: formData
-        });
-
-        if (response.ok) {
-          window.location.href = "thanks.html";  // ✅ 成功后跳转到感谢页面
-        } else {
-          alert("提交失败，请稍后重试");
-        }
-      } catch (error) {
-        alert("网络错误，请检查连接");
-      }
-    });
-  </script>
+  </div>
 </body>
 </html>
-
 
