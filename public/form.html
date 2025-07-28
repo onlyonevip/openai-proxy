@@ -109,7 +109,10 @@
     </div>
 
     <h1>宠物健康档案</h1>
-    <form action="thanks.html" method="POST">
+    <form id="petForm" action="/api/submit" method="POST" enctype="multipart/form-data">
+  <!-- 表单内容 -->
+</form>
+
       <label>1. 宠物的名字：</label>
       <input type="text" name="name" required />
 
@@ -196,7 +199,30 @@
 
       <button type="submit" class="submit-button">提交信息</button>
     </form>
+    <script>
+  document.getElementById("petForm").addEventListener("submit", async function(e) {
+    e.preventDefault(); // 阻止默认表单提交行为
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData
+      });
+
+      if (response.ok) {
+        window.location.href = "thanks.html";  // ✅ 成功后跳转到感谢页面
+      } else {
+        alert("提交失败，请稍后重试");
+      }
+    } catch (error) {
+      alert("网络错误，请检查连接");
+    }
+  });
+</script>
+
   </div>
 </body>
 </html>
-
