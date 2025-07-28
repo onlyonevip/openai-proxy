@@ -109,7 +109,10 @@
     </div>
 
     <h1>宠物健康档案</h1>
-    <form id="petHealthForm"> 
+    <form id="petHealthForm" 
+          action="https://forms.gle/kdAP7RJMkK6h52Jz7" 
+          method="POST"
+          target="hiddenFrame"> 
       <label>1. 宠物的名字：</label>
       <input type="text" name="name" required />
 
@@ -194,54 +197,57 @@
         </details>
       </div>
 
-      <button type="button" id="submitBtn" class="submit-button">提交信息</button>
-   <div id="errorMessage" style="color: red; margin-top: 15px; display: none;">
-  请检查必填项！
+       <button type="submit" id="submitBtn" class="submit-button">
+        <span id="submitText">提交信息</span>
+        <span id="loadingIcon" class="loading" style="display:none;"></span>
+      </button>
+<div id="errorMessage" class="error-message">
+        请填写所有必填字段！
 </div> 
     </form>
+ <iframe name="hiddenFrame" style="display:none;"></iframe> 
   </div>
 <script>
-  // 获取关键元素
-  const submitBtn = document.getElementById('submitBtn');
-  const errorMessage = document.getElementById('errorMessage');
-  
-  submitBtn.addEventListener('click', function() {
-    // 1. 验证必填字段
-    const requiredFields = [
-      document.getElementsByName('name')[0],      // 宠物名字
-      document.getElementsByName('type')[0],      // 宠物类型
-      document.getElementsByName('wechat')[0]     // 微信号
-    ];
-    
-    let isValid = true;
-    
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        isValid = false;
-        field.style.border = "2px solid red";  // 错误高亮
-      } else {
-        field.style.border = "";  // 清除高亮
+    document.getElementById('petHealthForm').addEventListener('submit', function(e) {
+      // 1. 检查必填字段
+      const requiredFields = [
+        document.querySelector('input[name="entry.123456789"]'), // 宠物名字
+        document.querySelector('input[name="entry.987654321"]'), // 宠物类型
+        document.querySelector('input[name="entry.606060606"]')  // 微信号
+      ];
+      
+      let hasError = false;
+      
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.border = "1px solid red";
+          hasError = true;
+        } else {
+          field.style.border = "";
+        }
+      });
+      
+      // 2. 如果有错误显示提示
+      if (hasError) {
+        document.getElementById('errorMessage').style.display = 'block';
+        e.preventDefault(); // 阻止表单提交
+        return;
       }
+      
+      // 3. 隐藏错误提示
+      document.getElementById('errorMessage').style.display = 'none';
+      
+      // 4. 显示加载动画
+      document.getElementById('loadingIcon').style.display = 'inline-block';
+      document.getElementById('submitText').textContent = '提交中...';
+      document.getElementById('submitBtn').disabled = true;
+      
+      // 5. 设置5秒后跳转到感谢页面
+      setTimeout(function() {
+        window.location.href = 'thanks.html';
+      }, 5000);
     });
-    
-    // 2. 验证失败处理
-    if (!isValid) {
-      errorMessage.style.display = 'block';
-      return;
-    }
-    
-    // 3. 验证通过 - 显示加载状态
-    errorMessage.style.display = 'none';
-    submitBtn.textContent = '提交中...';
-    submitBtn.disabled = true;
-    
-    // 4. 模拟处理过程（实际项目这里会发送数据到服务器）
-    setTimeout(() => {
-      // 5. 跳转到感谢页面
-      window.location.href = 'thanks.html';
-    }, 1500); // 1.5秒延迟模拟网络请求
-  });
-</script>
+  </script>
 </body>
 </html>
 
