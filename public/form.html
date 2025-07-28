@@ -1,96 +1,155 @@
-<fieldset>
-  <label class="block font-semibold">1. 宠物的名字</label>
-  <input type="text" name="pet_name" required class="w-full border border-gray-300 rounded p-2" placeholder="例如：米糕、小花、豆豆"/>
-</fieldset>
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>宠物AI健康问诊</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>宠物健康信息收集表单</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      background-color: #f9f9f9;
+      padding: 2em;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin: 0.8em 0 0.3em;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.6em;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .checkbox-group label {
+      font-weight: normal;
+    }
+    .section {
+      margin-top: 2em;
+      padding: 1.5em;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.03);
+    }
+    .disclaimer {
+      background-color: #fff3cd;
+      padding: 1em;
+      border-left: 6px solid #ffcc00;
+      margin-bottom: 2em;
+      border-radius: 6px;
+    }
+    button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.8em 1.5em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
-  <div class="max-w-2xl mx-auto p-6 bg-white mt-10 rounded-xl shadow-md">
-    <h1 class="text-2xl font-bold mb-6">🐾 宠物AI健康问诊</h1>
-    <p class="mb-4 text-sm text-gray-600">请根据以下提示填写宠物的健康信息，我们的AI将提供个性化建议。提交后建议将在微信或邮箱中发送。</p>
-    <form action="/api/submit" method="POST" class="space-y-4">
-      <fieldset>
-        <label class="block font-semibold">1. 宠物类型</label>
-        <select name="pet_type" class="w-full border border-gray-300 rounded p-2" required>
-          <option value="">请选择</option>
-          <option>狗</option>
-          <option>猫</option>
-          <option>其他</option>
-        </select>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">2. 宠物年龄</label>
-        <select name="pet_age" class="w-full border border-gray-300 rounded p-2" required>
-          <option value="">请选择</option>
-          <option>小于6个月</option>
-          <option>6个月-1岁</option>
-          <option>1岁-7岁</option>
-          <option>超过7岁</option>
-        </select>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">3. 宠物性别</label>
-        <select name="pet_gender" class="w-full border border-gray-300 rounded p-2" required>
-          <option value="">请选择</option>
-          <option>公</option>
-          <option>母</option>
-          <option>不确定</option>
-        </select>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">4. 出现症状（可多选）</label>
-        <div class="grid grid-cols-2 gap-2">
-          <label><input type="checkbox" name="symptoms" value="拉稀"> 拉稀</label>
-          <label><input type="checkbox" name="symptoms" value="呕吐"> 呕吐</label>
-          <label><input type="checkbox" name="symptoms" value="食欲不振"> 食欲不振</label>
-          <label><input type="checkbox" name="symptoms" value="便秘"> 便秘</label>
-          <label><input type="checkbox" name="symptoms" value="咳嗽/打喷嚏"> 咳嗽/打喷嚏</label>
-          <label><input type="checkbox" name="symptoms" value="精神不佳"> 精神不佳</label>
-          <label><input type="checkbox" name="symptoms" value="皮肤异常"> 皮肤异常</label>
-          <label><input type="checkbox" name="symptoms" value="其他"> 其他</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">5. 问题描述</label>
-        <textarea name="description" class="w-full border border-gray-300 rounded p-2 h-24" placeholder="请详细描述宠物的状况，包括发病时间、频率、是否伴随其他异常等..." required></textarea>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">6. 是否尝试过处理方式（可多选）</label>
-        <div class="grid grid-cols-2 gap-2">
-          <label><input type="checkbox" name="handling" value="停食"> 停食</label>
-          <label><input type="checkbox" name="handling" value="喂药"> 喂药</label>
-          <label><input type="checkbox" name="handling" value="清理水源"> 清理水源</label>
-          <label><input type="checkbox" name="handling" value="就医"> 就医</label>
-          <label><input type="checkbox" name="handling" value="未处理"> 未处理</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">7. 是否有照片（非必填）</label>
-        <input type="text" name="photo_note" class="w-full border border-gray-300 rounded p-2" placeholder="如有照片，请上传至微信并备注，如：已发照片至微信" />
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">8. 接收建议方式（可多选）</label>
-        <div class="flex gap-4">
-          <label><input type="checkbox" name="receive_way" value="微信"> 微信</label>
-          <label><input type="checkbox" name="receive_way" value="邮箱"> 邮箱</label>
-        </div>
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">9. 微信号（可选）</label>
-        <input type="text" name="wechat_id" class="w-full border border-gray-300 rounded p-2" placeholder="方便通过微信发送详细建议" />
-      </fieldset>
-      <fieldset>
-        <label class="block font-semibold">10. 邮箱（必填）</label>
-        <input type="email" name="email" required class="w-full border border-gray-300 rounded p-2" placeholder="建议报告将发送至此邮箱" />
-      </fieldset>
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">提交</button>
-    </form>
+<body>
+  <div class="disclaimer">
+    ⚠️ <strong>重要提示</strong><br/>
+    1. 本服务由AI生成健康养护建议，<strong>不可替代专业兽医诊断</strong>。<br/>
+    2. 若宠物出现：□ 吐血/便血 □ 抽搐 □ 昏迷 □ 呼吸困难 → <strong>请立即联系宠物医院！</strong><br/>
+    3. 提交即代表您同意《用户协议》并知悉AI建议的参考性质。
   </div>
+
+  <h1>宠物健康信息收集</h1>
+  <p><strong>请根据实际情况填写，AI将提供养护参考（不可替代兽医诊断）</strong></p>
+
+  <form>
+    <div class="section">
+      <label>1. 宠物的名字：</label>
+      <input type="text" name="pet_name" required />
+
+      <label>2. 宠物类型：</label>
+      <input type="text" name="pet_type" placeholder="狗、猫或其他" required />
+
+      <label>3. 年龄：</label>
+      <input type="text" name="age" placeholder="如：2岁" required />
+
+      <label>4. 性别：</label>
+      <select name="gender" required>
+        <option value="">请选择</option>
+        <option>公</option>
+        <option>母</option>
+        <option>已绝育</option>
+      </select>
+
+      <label>5. 疫苗情况：</label>
+      <select name="vaccine_status" required>
+        <option value="">请选择</option>
+        <option>未接种</option>
+        <option>部分接种</option>
+        <option>完整接种</option>
+      </select>
+
+      <label>6. 最后一次驱虫日期：</label>
+      <input type="text" name="deworm_date" placeholder="如：2025-07-01" required />
+
+      <label>7. 近期接触史（可多选）：</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="contact_history" value="陌生动物"> 接触陌生动物</label>
+        <label><input type="checkbox" name="contact_history" value="环境变化"> 环境变化（搬家/寄养）</label>
+        <label><input type="checkbox" name="contact_history" value="多宠家庭"> 多宠家庭</label>
+        <label><input type="checkbox" name="contact_history" value="无"> 无</label>
+      </div>
+
+      <label>8. 观察到的情况（可多选）：</label>
+      <p><em>请描述现象，AI将提供护理参考</em></p>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="symptoms" value="腹泻"> 软便/腹泻</label>
+        <label><input type="checkbox" name="symptoms" value="呕吐"> 呕吐</label>
+        <label><input type="checkbox" name="symptoms" value="食欲下降"> 食欲下降</label>
+        <label><input type="checkbox" name="symptoms" value="排便困难"> 排便困难</label>
+        <label><input type="checkbox" name="symptoms" value="呼吸异常"> 呼吸道异常（咳嗽/打喷嚏）</label>
+        <label><input type="checkbox" name="symptoms" value="精神萎靡"> 精神萎靡</label>
+        <label><input type="checkbox" name="symptoms" value="皮肤问题"> 皮肤红肿/脱毛</label>
+        <label><input type="checkbox" name="symptoms" value="其他"> 其他</label>
+      </div>
+
+      <label>9. 症状持续时间：</label>
+      <input type="text" name="duration" placeholder="如：2天3小时" required />
+
+      <label>10. 最近48小时饮食：</label>
+      <textarea name="diet_detail" rows="2" placeholder="吃过什么特殊食物？" required></textarea>
+
+      <label>11. 已采取的措施：</label>
+      <textarea name="actions_taken" rows="2" placeholder="如：停食12小时、喂益生菌" required></textarea>
+
+      <label>12. 照片补充（可选）：</label>
+      <input type="file" name="photo" accept="image/*" />
+
+      <label>13. 接收建议方式：</label>
+      <div>
+        <label><input type="radio" name="contact_method" value="wechat" required> 微信（强推及时接收预警）</label><br/>
+        微信号：<input type="text" name="wechat_id" />
+      </div>
+      <br/>
+      <div>
+        <label><input type="radio" name="contact_method" value="email" required> 邮箱</label><br/>
+        邮箱地址：<input type="email" name="email" required />
+      </div>
+    </div>
+
+    <br/>
+    <button type="submit">提交信息</button>
+  </form>
 </body>
 </html>
+
