@@ -97,8 +97,8 @@
     </div>
 
     <h1>宠物健康档案</h1>
-    <form id="petForm" action="/api/submit" method="POST" enctype="multipart/form-data">
 
+    <form id="petForm" action="/api/submit" method="POST" enctype="multipart/form-data">
       <label>1. 宠物的名字：</label>
       <input type="text" name="name" required />
 
@@ -176,14 +176,14 @@
         <details>
           <summary>📜 查看《用户协议》</summary>
           <p>
-            本服务由AI提供健康养护建议，不构成医疗行为，也不替代兽医诊断。<br>
-            所有建议基于您填写的信息，若填写不实或遗漏，将影响结果准确性。<br>
+            本服务由AI提供健康养护建议，不构成医疗行为，也不替代兽医诊断。<br />
+            所有建议基于您填写的信息，若填写不实或遗漏，将影响结果准确性。<br />
             使用本服务即视为您已知悉并接受此免责声明与使用协议。
           </p>
         </details>
       </div>
 
-      <label class="checkbox-label">
+      <label class="checkbox-label" style="margin-top:20px;">
         <input type="checkbox" required />
         我已阅读并同意《用户协议》，确认：<br />
         1. 我的宠物未出现协议禁止的危急症状<br />
@@ -193,7 +193,7 @@
 
       <button type="submit" class="submit-button">提交信息</button>
     </form>
-  </div>
+  </div> 
 
   <script>
     document.getElementById("petForm").addEventListener("submit", async function(e) {
@@ -220,4 +220,5 @@
   </script>
 </body>
 </html>
+
 
